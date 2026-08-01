@@ -195,7 +195,7 @@ document.getElementById('generateBtn').addEventListener('click', () => {
   const base = baseUrlInput.value.trim() || 'https://larth-experiencia.vercel.app/';
   const token = encodeToken(g, r);
   const baseClean = base.endsWith('/') ? base : base + '/';
-  const url = baseClean + token;
+  const url = baseClean + '#p=' + token;
   linkBox.textContent = url;
   linkBox.classList.add('show');
   postActions.style.display = 'flex';
