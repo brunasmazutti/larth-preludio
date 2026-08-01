@@ -4,22 +4,18 @@
 <script>
   // Restaura o link limpo na barra de endereço após o redirecionamento do 404.html
   (function(l) {
-    if (l.search[1] === '/' ) {
-      var decoded = l.search.slice(1).split('&').map(function(s) {
-        return s.replace(/~and~/g, '&');
-      }).join('?');
-      window.history.replaceState(null, null,
-        l.pathname.slice(0, -1) + decoded + l.hash
-      );
+    var m = l.search.match(/^\?p=([^&]*)/);
+    if (m) {
+      window.history.replaceState(null, null, l.pathname.replace(/\/$/, '') + '/' + m[1] + l.hash);
     }
   }(window.location));
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>LARTH — Prelúdio</title>
+<title>LARTH</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Ephesis&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#ECE2D0;
@@ -36,7 +32,7 @@
   *{box-sizing:border-box; margin:0; padding:0; -webkit-tap-highlight-color:transparent;}
   html,body{ height:100%; background:var(--bg); }
   body{
-    font-family:'Cormorant Garamond', serif;
+    font-family:'Fraunces', serif;
     color:var(--ink);
     overflow:hidden;
     display:block;
@@ -105,9 +101,9 @@
   .scene.active{ opacity:1; visibility:visible; pointer-events:auto; z-index:10; }
   .scene:not(.active){ pointer-events:none; }
 
-  h1,h2{ font-family:'Cormorant Garamond', serif; font-weight:300; line-height:1.22; color:var(--ink); text-rendering:optimizeLegibility; font-synthesis:none; }
+  h1,h2{ font-family:'Fraunces', serif; font-weight:300; line-height:1.22; color:var(--ink); text-rendering:optimizeLegibility; font-synthesis:none; }
   p{ color:var(--ink-dim); line-height:1.75; font-weight:300; }
-  .script{ font-family:'Mrs Saint Delafield', cursive; font-style:normal; color:var(--accent); }
+  .script{ font-family:'Ephesis', cursive; font-style:normal; color:var(--accent); }
 
   .hint{
     position:absolute; bottom:64px; left:0; right:0;
@@ -135,6 +131,7 @@
     50%{ transform:scale(1.05); box-shadow:0 0 30px 8px rgba(74,56,38,.05); }
   }
   #s1 h1{ font-size:25px; margin-top:34px; max-width:250px; }
+  #s1 h1 .script{ font-size:37px; }
   #s1-logo{
     position:absolute; top:8.5vh; left:0; right:0;
     display:flex; justify-content:center;
@@ -146,35 +143,35 @@
   /* ============ SCENE 2 — desaceleração ============ */
   #s2{ background:var(--bg); }
   .lines > span{
-    display:block; font-family:'Cormorant Garamond', serif; font-weight:300; font-style:italic;
-    font-size:22px; color:var(--ink-dim);
+    display:block; font-family:'Fraunces', serif; font-weight:300; font-style:italic;
+    font-size:25px; color:var(--ink-dim);
     opacity:0; transform:translateY(8px);
     transition:opacity 1.3s var(--ease), transform 1.3s var(--ease);
     margin-bottom:6px;
   }
   .lines > span.show{ opacity:1; transform:translateY(0); }
   .lines > span:last-child{ margin-top:6px; }
-  .lines > span:last-child .script{ font-size:34px; }
+  .lines .script{ font-size:37px; }
 
   /* ============ SCENE 4 — quem enviou ============ */
   #s4{ background:var(--bg); }
   .giver-line{
-    max-width:280px; font-size:20px; font-weight:300; font-style:italic; color:var(--ink-dim);
+    max-width:290px; font-size:23px; font-weight:300; font-style:italic; color:var(--ink-dim);
     line-height:1.8; opacity:0; transform:translateY(8px);
     transition:opacity 1.3s var(--ease), transform 1.3s var(--ease);
   }
   .giver-line.show{ opacity:1; transform:translateY(0); }
-  .giver-line .script{ font-style:normal; font-size:30px; }
+  .giver-line .script{ font-style:normal; font-size:33px; }
 
   /* ============ SCENE 5 — mensagem personalizada ============ */
   #s5{ background:var(--bg); }
   .message{
-    max-width:300px; font-size:19px; font-weight:300; font-style:italic; color:var(--ink-dim);
-    line-height:1.85; opacity:0; transition:opacity 1.4s var(--ease);
+    max-width:330px; font-size:19px; font-weight:300; font-style:italic; color:var(--ink-dim);
+    line-height:1.8; opacity:0; transition:opacity 1.4s var(--ease);
   }
   .message.show{ opacity:1; }
-  .message .script{ font-style:normal; font-size:30px; color:var(--accent); }
-  .quote-mark{ font-family:'Cormorant Garamond',serif; font-size:44px; color:var(--ink-faint); line-height:0; margin-bottom:14px; opacity:0; transition:opacity 1s var(--ease); }
+  .message .script{ font-style:normal; font-size:29px; color:var(--accent); }
+  .quote-mark{ font-family:'Fraunces',serif; font-size:40px; color:var(--ink-faint); line-height:0; margin-bottom:12px; opacity:0; transition:opacity 1s var(--ease); }
   .quote-mark.show{ opacity:1; }
 
   /* ============ SCENE 6 (antiga 7) — encerramento ============ */
@@ -190,11 +187,12 @@
     to{ opacity:1; transform:translate(-50%,-50%); }
   }
   #s7 h2{ font-size:25px; }
+  #s7 h2 .script{ font-size:37px; }
   .cta{
     display:inline-block; margin-top:36px; padding:16px 28px;
     border:1px solid var(--accent); border-radius:12px;
     color:var(--ink); text-decoration:none;
-    font-family:'Cormorant Garamond',serif; font-size:12px; letter-spacing:.13em; text-transform:uppercase;
+    font-family:'Fraunces',serif; font-size:12px; letter-spacing:.13em; text-transform:uppercase;
     background:transparent; cursor:pointer; white-space:nowrap;
     transition:background .5s var(--ease);
   }
@@ -230,7 +228,7 @@
           <path d="M50 26 L54 46 L74 50 L54 54 L50 74 L46 54 L26 50 L46 46 Z" stroke-width="0.8"/>
         </svg>
       </div>
-      <h1>Esse momento<br>foi pensado<br>especialmente<br>para você.</h1>
+      <h1>Esse momento<br>foi pensado<br>especialmente<br>para <span class="script">você</span>.</h1>
     </div>
     <div class="hint">toque no selo</div>
   </section>
@@ -239,7 +237,8 @@
   <section class="scene" id="s2">
     <div class="lines" id="lines">
       <span>Uma pausa na rotina.</span>
-      <span>Um momento de <span class="script">cuidado,</span> só seu.</span>
+      <span>Um momento de <span class="script">cuidado,</span></span>
+      <span>só seu.</span>
     </div>
   </section>
 
@@ -247,14 +246,14 @@
 
   <!-- 4. QUEM ENVIOU -->
   <section class="scene" id="s4">
-    <p class="giver-line" id="giverLine">Pensado com carinho por <span class="script" id="giverName">Marina</span> para <span class="script" id="recipientName">Camila</span>.</p>
+    <p class="giver-line" id="giverLine">Pensado com carinho<br>por <span class="script" id="giverName">Marina</span><br>para <span class="script" id="recipientName">Camila</span>.</p>
     <div class="hint">toque para continuar</div>
   </section>
 
   <!-- 5. MENSAGEM PERSONALIZADA -->
   <section class="scene" id="s5">
     <div class="quote-mark" id="quoteMark">“</div>
-    <p class="message" id="message">Alguns presentes permanecem.<br>Não pelo que oferecem,<br>mas pela forma como nos fazem sentir.<br>Este é o início de um momento criado para desacelerar, cuidar e revelar a <span class="script">beleza</span> que já existe em você.</p>
+    <p class="message" id="message">Alguns presentes permanecem.<br>Não pelo que oferecem,<br>mas pela forma como nos fazem sentir.<br>Este é o início de um momento criado para <span class="script">desacelerar</span>, <span class="script">cuidar</span> e <span class="script">revelar</span> a beleza que já existe em você.</p>
     <div class="hint">toque para continuar</div>
   </section>
 
@@ -262,7 +261,7 @@
   <!-- 6. PASSAGEM / ENCERRAMENTO -->
   <section class="scene" id="s7">
     <div class="passage-content">
-      <h2>Sua experiência<br>espera por você.</h2>
+      <h2>Sua experiência<br>espera por <span class="script">você</span>.</h2>
       <a href="https://wa.me/555497034282?text=Ol%C3%A1%21%20Quero%20reservar%20a%20experi%C3%AAncia%20que%20foi%20preparada%20para%20mim" class="cta" id="cta" target="_blank" rel="noopener">RESERVAR MEU MOMENTO</a>
     </div>
     <div class="footer-logo">
@@ -289,7 +288,7 @@
   const data = token ? decodeToken(token) : null;
   if(data && data.giver) document.getElementById('giverName').textContent = data.giver;
   if(data && data.recipient) document.getElementById('recipientName').textContent = data.recipient;
-  document.title = 'LARTH — Prelúdio';
+  document.title = 'LARTH';
 
   const scenes = Array.from(document.querySelectorAll('.scene'));
   const dots = Array.from(document.querySelectorAll('.progress span'));

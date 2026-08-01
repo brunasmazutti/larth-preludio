@@ -202,7 +202,7 @@ document.getElementById('generateBtn').addEventListener('click', () => {
   copiedMsg.classList.remove('show');
 
   // Mensagem genérica, sem nomes nem palavra "presente" — pode ser encaminhada sem edição
-  const waText = 'Tem algo especial esperando por você. 🤍\nQuando tiver um momento, abra este link.\n' + url;
+  const waText = 'Tem algo especial esperando por você.\nQuando tiver um momento, abra este link.\n' + url;
   const phone = document.getElementById('buyerPhone').value.replace(/\D/g,'');
   waBtn.href = (phone ? 'https://wa.me/' + phone : 'https://wa.me/') + '?text=' + encodeURIComponent(waText);
 });
